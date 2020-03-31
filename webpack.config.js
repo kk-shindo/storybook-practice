@@ -1,5 +1,6 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = {
   entry: './src/main.js',
@@ -57,8 +58,14 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        // loader: 'babel-loader',
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'] // 変更前は 'env'
+          }
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -86,7 +93,10 @@ module.exports = {
   devtool: '#eval-source-map',
   node: {
     fs: 'empty'
-  }
+  },
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
