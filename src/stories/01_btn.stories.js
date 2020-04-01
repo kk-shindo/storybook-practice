@@ -1,7 +1,8 @@
 import { storiesOf } from '@storybook/vue'
 import { linkTo } from '@storybook/addon-links'
+import { action } from '@storybook/addon-actions'
 import { withNotes } from '@storybook/addon-notes'
-import { withKnobs, text } from '@storybook/addon-knobs'
+import { withKnobs, text, select } from '@storybook/addon-knobs'
 import Centered from '@storybook/addon-centered/vue'
 
 import Btn01 from './../components/01_btn/Btn01.vue'
@@ -13,135 +14,95 @@ storiesOf('01_btn', module)
   .addDecorator(withKnobs)
   .addDecorator(Centered)
   .add('c-btn01', () => {
-    const label = text('Label', 'BUTTON', 'hogehoge')
-    const color = ''
     return {
       components: { Btn01 },
       template: `
         <Btn01
-        label="${label}"
-        color="${color}"
-        ></Btn01>
-      `
-    }
-  })
-  .add('c-btn01--color01', () => {
-    const label = text('Label', 'BUTTON')
-    const color = 'color01'
-    return {
-      components: { Btn01 },
-      template: `
-        <div>
-          <Btn01
-          label="${label}"
-          color="${color}"
-          ></Btn01>
-        </div>
-      `
-    }
-  })
-  .add('c-btn01--color02', () => {
-    const label = text('Label', 'BUTTON')
-    const color = 'color02'
-    return {
-      components: { Btn01 },
-      template: `
-        <div>
-          <Btn01
-          label="${label}"
-          color="${color}"
-          ></Btn01>
-        </div>
-      `
-    }
-  })
-  .add('c-btn01--color03', () => {
-    const label = text('Label', 'BUTTON')
-    const color = 'color03'
-    return {
-      components: { Btn01 },
-      template: `
-        <div>
-          <Btn01
-          label="${label}"
-          color="${color}"
-          ></Btn01>
-        </div>
-      `
-    }
-  })
-  .add('c-btn01--download03', () => {
-    const label = text('Label', 'BUTTON')
-    const color = 'download03'
-    return {
-      components: { Btn01 },
-      template: `
-        <div>
-          <Btn01
-          label="${label}"
-          color="${color}"
-          ></Btn01>
-        </div>
-      `
+        :class="getClassName"
+        >{{ label }}</Btn01>
+      `,
+      methods: {
+        action: action('clicked')
+      },
+      props: {
+        label: {
+          default: text('Label', 'BUTTON')
+        },
+        modifier: {
+          default: select('Modifier', {
+            Color01: '--color01',
+            Color02: '--color02',
+            Color03: '--color03',
+            Download03: '--download03',
+            None: ''
+          }, '')
+        }
+      },
+      computed: {
+        getClassName() {
+          const className = 'c-btn01'
+          return className + this.modifier
+        }
+      }
     }
   })
   .add('c-btn02', () => {
-    const label = text('Label', 'BUTTON')
-    const color = ''
     return {
       components: { Btn02 },
       template: `
-        <div>
-          <Btn02
-          label="${label}"
-          color="${color}"
-          ></Btn02>
-        </div>
-      `
+        <Btn02
+        :class="getClassName"
+        >{{ label }}</Btn02>
+      `,
+      methods: {
+        action: action('clicked')
+      },
+      props: {
+        label: {
+          default: text('Label', 'BUTTON')
+        },
+        modifier: {
+          default: select('Modifier', {
+            None: ''
+          }, '')
+        }
+      },
+      computed: {
+        getClassName() {
+          const className = 'c-btn02'
+          return className + this.modifier
+        }
+      }
     }
   })
   .add('c-btn03', () => {
-    const label = text('Label', 'BUTTON')
-    const color = ''
     return {
       components: { Btn03 },
       template: `
-        <div>
-          <Btn03
-          label="${label}"
-          color="${color}"
-          ></Btn03>
-        </div>
-      `
-    }
-  })
-  .add('c-btn03--color01', () => {
-    const label = text('Label', 'BUTTON')
-    const color = 'color01'
-    return {
-      components: { Btn03 },
-      template: `
-        <div>
-          <Btn03
-          label="${label}"
-          color="${color}"
-          ></Btn03>
-        </div>
-      `
-    }
-  })
-  .add('c-btn03--color02', () => {
-    const label = text('Label', 'BUTTON')
-    const color = 'color02'
-    return {
-      components: { Btn03 },
-      template: `
-        <div>
-          <Btn03
-          label="${label}"
-          color="${color}"
-          ></Btn03>
-        </div>
-      `
+        <Btn03
+        :class="getClassName"
+        >{{ label }}</Btn03>
+      `,
+      methods: {
+        action: action('clicked')
+      },
+      props: {
+        label: {
+          default: text('Label', 'BUTTON')
+        },
+        modifier: {
+          default: select('Modifier', {
+            Color01: '--color01',
+            Color02: '--color02',
+            None: ''
+          }, '')
+        }
+      },
+      computed: {
+        getClassName() {
+          const className = 'c-btn03'
+          return className + this.modifier
+        }
+      }
     }
   })
